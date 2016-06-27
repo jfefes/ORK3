@@ -1,15 +1,11 @@
 <?php
 
-include_once( dirname( __FILE__ ) . '/config.php' );
+require_once( 'vendor/autoload.php' );
+require_once( dirname( __FILE__ ) . '/config.php' );
 
-// System Setup
+$app = new App();
 
-if ( isset( $LOG ) )
-	return;
-
-$LOG;
-$DB;
-
+/*
 if ( !isset( $DB ) ) {
 	$DB = new yapo_mysql( DB_HOSTNAME, DB_DATABASE, DB_USERNAME, DB_PASSWORD );
 }
@@ -52,3 +48,4 @@ if ( !DO_SETUP ) {
 	Ork3::$Lib = $LIB;
 	Ork3::$Lib->Log = $LOG;
 }
+*/

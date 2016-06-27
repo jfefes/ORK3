@@ -1,0 +1,15 @@
+{
+    "name": "amtgard/ork",
+    "description": "The Online Record Keeper for Amtgard.",
+    "require": {
+        "propel/propel": "~2.0@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ork\\": "src/"
+        },
+        "files": [
+            "src/Ork/helpers.php"
+        ]
+    }
+}

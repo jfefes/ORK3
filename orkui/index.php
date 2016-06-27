@@ -21,16 +21,17 @@ define( 'UIR', HTTP_UI_REMOTE . 'index.php?Route=' );
  ***********************************************/
 $DONOTWEBSERVICE = true;
 
+$app = new App();
+$Session = $app->session();
+
 $Settings = new Settings();
-$Session = new Session();
 $Request = new Request();
 
 if ( empty( $_REQUEST[ 'Route' ] ) ) {
     $_REQUEST[ 'Route' ] = '';
 }
 $route = explode( '/', $_REQUEST[ "Route" ] );
-logtrace( 'Index: Route', $route );
-Ork3::$Lib->session->times[ 'Route' ] = time();
+
 if ( file_exists( DIR_CONTROLLER . 'controller.' . trim( $route[ 0 ] ) . '.php' ) ) {
     include_once( DIR_CONTROLLER . 'controller.' . trim( $route[ 0 ] ) . '.php' );
     $class = 'Controller_' . trim( $route[ 0 ] );
@@ -72,20 +73,10 @@ if ( file_exists( DIR_CONTROLLER . 'controller.' . trim( $route[ 0 ] ) . '.php' 
     $C = new Controller( "index" );
     $C->index();
 }
-Ork3::$Lib->session->times[ 'Route Complete' ] = time();
 
 $CONTENT = $C->view();
 
-Ork3::$Lib->session->times[ 'Composite' ] = time();
-
 echo $CONTENT;
-
-logtrace( "Timing Information", Ork3::$Lib->session->times );
-
-if ( DUMPTRACE ) {
-    logtrace( 'Session', $_SESSION );
-    dumplogtrace();
-}
 
 function required_parameter_count( $class, $call )
 {
@@ -97,5 +88,3 @@ function required_parameter_count( $class, $call )
     }
     return $required;
 }
-
-?>
